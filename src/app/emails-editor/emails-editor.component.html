@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="form">
+    <div class="form-content">
+      <div class="form-content-heading">
+        Share <span class="form-content-heading-bold">Board name</span> with other
+      </div>
+      <div #wrapper (click)="onWrapperFocus(form)" class="form-content-input-wrapper">
+        <div *ngFor="let email of emails" 
+              class="emails-wrapper">
+          <div class="valid-email"
+                *ngIf="email.isValid">
+            <div [innerHtml]="email.email"></div>
+            <button (click)="removeItself($event)"
+                    class="remove-btn">x</button>
+          </div>
+          
+          <span *ngIf="!email.isValid" 
+                [innerHtml]="email.email"
+                class="invalid-email">
+          </span>
+        </div>
+        <textarea #form 
+                  (keyup.enter)="onEnter(form)" 
+                  (keyup.backspace)="removeLastOne(form)"
+                  (keyup)="onKeyUp(form)"
+                  (blur)="onBlur(form)"
+                  class="form-content-input" 
+                  rows="1"
+                  placeholder="add more people..."></textarea>
+          
+      </div>
+    </div>
+    <div class="form-buttons">
+        <button type="button" 
+                class="btn btn-md btn-primary add-email-btn"
+                (click)="addRandomEmail()">Add email</button>
+        <button type="button" 
+                class="btn btn-md btn-primary get-rn-email-btn"
+                (click)="emailsCount()">Get email count</button>
+    </div>
+  </div>
+</div>
